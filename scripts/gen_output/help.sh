@@ -2,7 +2,7 @@
 set -eo pipefail
 
 gen_help() {
-  bins=(forge cast anvil chisel)
+  bins=(bin/forge)
   for bin in "${bins[@]}"; do
     need_cmd "$bin"
     echo "Generating help output ($bin)..."
