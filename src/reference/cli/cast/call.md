@@ -47,10 +47,6 @@ Options:
   -h, --help
           Print help (see a summary with '-h')
 
-Display options:
-  -j, --json
-          Print the decoded output as JSON
-
 Transaction options:
       --gas-limit <GAS_LIMIT>
           Gas limit for the transaction
@@ -58,10 +54,7 @@ Transaction options:
           [env: ETH_GAS_LIMIT=]
 
       --gas-price <PRICE>
-          Gas price for legacy transactions, or max fee per gas for EIP1559 transactions, either
-          specified in wei, or as a string with a unit type.
-          
-          Examples: 1ether, 10gwei, 0.01ether
+          Gas price for legacy transactions, or max fee per gas for EIP1559 transactions
           
           [env: ETH_GAS_PRICE=]
 
@@ -187,8 +180,4 @@ Wallet options - hardware wallet:
 
   -t, --trezor
           Use a Trezor hardware wallet
-
-Wallet options - remote:
-      --aws
-          Use AWS Key Management Service
 ```

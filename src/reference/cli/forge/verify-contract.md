@@ -109,6 +109,9 @@ Options:
           
           [default: 5]
 
+      --zksync
+          Verify for zksync
+
   -h, --help
           Print help (see a summary with '-h')
 
