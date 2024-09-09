@@ -3,8 +3,10 @@
 $ forge build
 // ANCHOR_END: command
 // ANCHOR: output
-Compiling 27 files with Solc 0.8.26
-Solc 0.8.26 finished in 819.87ms
+Compiling 27 files with Solc 0.8.27
+installing solc version "0.8.27"
+Successfully installed solc 0.8.27
+Solc 0.8.27 finished in 1.30s
 Compiler run successful!
 // ANCHOR_END: output
 // ANCHOR_END: all
