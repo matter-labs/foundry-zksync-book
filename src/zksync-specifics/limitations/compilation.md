@@ -21,6 +21,8 @@ contract FooTest is Test {
 }
 ```
 
+See [here](./general.md#accessing-contract-bytecode-and-hash) on how to circumvent this issue.
+
 ### Contract Size Limit
 
 `zksolc` currently limits the number of instructions to 2^16 that are compiled for a contract. As such for large contracts, the compilation will fail with the error:

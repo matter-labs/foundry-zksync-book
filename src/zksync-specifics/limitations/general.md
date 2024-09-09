@@ -114,7 +114,7 @@ function createAddress(sender: Address, senderNonce: BigNumberish) {
 
 ### Accessing Contract Bytecode and Hash
 
-zkEVM does not allow obtaining bytecodes from `address.code` or computing their respective hashes. This is particularly useful when computing CREATE2 addresses.
+zkEVM does not allow obtaining bytecodes from `address.code` or computing their respective hashes, which will be raised as an error during [compilation](./compilation.md#contract-bytecode-access). This is particularly useful when computing CREATE2 addresses.
 
 To circumvent this limitation, it is recommended to use the FFI functionality of cheatcodes: 
 
