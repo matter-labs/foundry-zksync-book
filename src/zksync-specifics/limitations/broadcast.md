@@ -7,11 +7,11 @@ These limitations apply when using `cast` to broadcast transactions.
 Batching is currently not supported on ZKsync networks, as such, any batched transactions may not be executed in order. This can often lead to failures as in the following case:
 
 ```solidity
-/ contract Calculator {
-/     function add(uint8 a, uint8 b) return (uint8) {
-/         return a+b;
-/     }
-/ }
+contract Calculator {
+    function add(uint8 a, uint8 b) return (uint8) {
+        return a+b;
+    }
+}
 
 contract FooScript is Script {
     function run() public {
