@@ -1,6 +1,6 @@
 ## Trace Limitations
 
-zkEVM traces are attached to the EVM traces that are printed with `-vvvvv`.
+zkEVM traces are attached to the EVM traces that are printed with `-vvvv`.
 
 
 * The events emitted from within the zkEVM will not show on traces. See [events](../zksync-specifics/limitations/events.md) in zkEVM.
@@ -13,7 +13,7 @@ These system traces can be observed via setting the `RUST_LOG` env variable:
 RUST_LOG=foundry_zksync_core::vm::inspect=info,era_test_node::formatter=info forge test --zksync
 ```
 
-````ignore
+```ignore
 ┌──────────────────────────┐
 │   VM EXECUTION RESULTS   │
 └──────────────────────────┘
@@ -55,4 +55,72 @@ Call(Normal) Account Code Storage                                         4de2e4
     Call(Normal) 0xf9e9ba9ed9b96ab918c74b21dd0f1d5f2ac38a30                   45caa117    77422023
   Call(Normal) System context                                               a851ae78    4227757947
   ...
+```
+
+
+### Combined Traces
+Foundry ZKsync will combine the traces from within the zkEVM into the EVM traces, that foundry displays. Running the following test with `forge test --zksync -vvvv`, yields the displayed trace:
+
+```solidity
+contract InnerNumber {
+    event Value(uint8);
+
+    function innerFive() public returns (uint8) {
+        emit Value(5);
+        return 5;
+    }
+}
+
+contract Number {
+    function five() public returns (uint8) {
+        InnerNumber num = new InnerNumber();
+        return num.innerFive();
+    }
+}
+
+contract Adder {
+    function add() public returns (uint8) {
+        Number num = new Number();
+        return num.five() + num.five();
+    }
+}
+
+contract FooTest is Test {
+    function testFoo() public {
+        Adder adder = new Adder();
+        uint8 value = adder.add();
+        assert(value == 10);
+        console.log(value);
+    }
+}
+```
+
+```ignore
+[PASS] testFoo() (gas: 35807)
+Logs:
+  10
+
+Traces:
+  [35807] ZkTraceTest::testZkTraceOutputDuringCall()
+    ├─ [0] → new Adder@0xF9E9ba9Ed9B96AB918c74B21dD0f1D5f2ac38a30
+    │   └─ ← [Return] 2976 bytes of code
+    ├─ [0] Adder::add()
+    │   ├─ [127] → new Number@0xf232f12E115391c535FD519B00efADf042fc8Be5
+    │   │   └─ ← [Return] 2272 bytes of code
+    │   ├─ [91190] Number::five()
+    │   │   ├─ [91] → new InnerNumber@0xEd570f3F91621894E001DF0fB70BfbD123D3c8AD
+    │   │   │   └─ ← [Return] 736 bytes of code
+    │   │   ├─ [889] InnerNumber::innerFive()
+    │   │   │   └─ ← [Return] 5
+    │   │   └─ ← [Return] 5
+    │   ├─ [74776] Number::five()
+    │   │   ├─ [91] → new InnerNumber@0xAbceAEaC3d3a2ac3Dcffd7A60Ca00A3fAC9490cA
+    │   │   │   └─ ← [Return] 736 bytes of code
+    │   │   ├─ [889] InnerNumber::innerFive()
+    │   │   │   └─ ← [Return] 5
+    │   │   └─ ← [Return] 5
+    │   └─ ← [Return] 10
+    ├─ [0] console::log(10) [staticcall]
+    │   └─ ← [Stop] 
+    └─ ← [Stop] 
 ```
