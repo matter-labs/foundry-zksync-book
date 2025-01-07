@@ -37,7 +37,7 @@ Options:
           [env: ETH_RPC_URL=]
 
       --verification-type <TYPE>
-          Verfication Type: `full` or `partial`. Ref:
+          Verification Type: `full` or `partial`. Ref:
           <https://docs.sourcify.dev/docs/full-vs-partial-match/>
           
           [default: full]
