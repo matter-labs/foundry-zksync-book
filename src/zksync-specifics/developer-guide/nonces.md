@@ -2,8 +2,8 @@
 
 Nonces in EVM are generally 8-bytes long and are incremented for both external transactions and `CREATE` opcodes.
 
-Zksync deviates from EVM nonces in the form that the nonces are split into `transaction nonce` and `deployment nonce`, which are incremented on external
-transactions and deployments, respectively. The nonces have a theoretical maximum size of 16-bytes but the rpc as of now only works with 4-bytes.
+ZKsync deviates from EVM nonces in the form that the nonces are split into `transaction nonce` and `deployment nonce`, which are incremented on external transactions and deployments, respectively. 
+The nonces have a theoretical maximum size of 16-bytes but the rpc as of now only works with 4-bytes.
 
 
 ## `forge test`: EVM
