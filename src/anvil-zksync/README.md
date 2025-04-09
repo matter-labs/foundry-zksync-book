@@ -24,4 +24,4 @@ anvil-zksync  -p, --port <PORT>
 
 > 📚 **Reference**
 >
-> See the [`anvil-zksync` Reference](../reference/anvil-zksync/) for in depth information on Anvil-ZKsync and its capabilities.
+> See the [`anvil-zksync` Reference](../reference/anvil-zksync/README.md) for in depth information on Anvil-ZKsync and its capabilities.
