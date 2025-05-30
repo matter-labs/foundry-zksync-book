@@ -60,7 +60,7 @@ Options:
           Number of threads to use. Specifying 0 defaults to the number of
           logical cores
           
-          [aliases: jobs]
+          [aliases: --jobs]
 
 Transaction options:
       --gas-limit <GAS_LIMIT>
@@ -208,7 +208,22 @@ Wallet options - raw:
       --with-local-artifacts
           Use current project artifacts for trace decoding
           
-          [aliases: la]
+          [aliases: --la]
+
+      --override-balance <ADDRESS:BALANCE>
+          Override the balance of an account. Format: address:balance
+
+      --override-nonce <ADDRESS:NONCE>
+          Override the nonce of an account. Format: address:nonce
+
+      --override-code <ADDRESS:CODE>
+          Override the code of an account. Format: address:code
+
+      --override-state <ADDRESS:SLOT:VALUE>
+          Override the state of an account. Format: address:slot:value
+
+      --override-state-diff <ADDRESS:SLOT:VALUE>
+          Override the state diff of an account. Format: address:slot:value
 
       --override-balance <ADDRESS:BALANCE>
           Override the balance of an account. Format: address:balance
