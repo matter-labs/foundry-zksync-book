@@ -225,6 +225,21 @@ Wallet options - raw:
       --override-state-diff <ADDRESS:SLOT:VALUE>
           Override the state diff of an account. Format: address:slot:value
 
+      --override-balance <ADDRESS:BALANCE>
+          Override the balance of an account. Format: address:balance
+
+      --override-nonce <ADDRESS:NONCE>
+          Override the nonce of an account. Format: address:nonce
+
+      --override-code <ADDRESS:CODE>
+          Override the code of an account. Format: address:code
+
+      --override-state <ADDRESS:SLOT:VALUE>
+          Override the state of an account. Format: address:slot:value
+
+      --override-state-diff <ADDRESS:SLOT:VALUE>
+          Override the state diff of an account. Format: address:slot:value
+
 Wallet options - keystore:
       --keystore <PATH>
           Use the keystore in the given folder or file
