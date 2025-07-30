@@ -1,11 +1,29 @@
 ## Cast
 
+> ℹ️ **Note**
+>
+> `cast run` and `cast call` for zkysnc requires the presence of `--zksync` and a `--private-key` as there's no zero address to default to.
+>
+```sh
+cast run --zksync --private-key <PRIVATE_KEY> 0x9c32042f5e997e27e67f82583839548eb19dc78c4769ad6218657c17f2a5ed31 --rpc-url https://sepolia.era.zksync.dev
+
+cast call --zksync --private-key <PRIVATE_KEY> 0x5FbDB2315678afecb367f032d93F642f64180aa3 "number()" --rpc-url https://sepolia.era.zksync.dev --trace
+```
+
+
 Cast is a Swiss Army knife for interacting with Ethereum applications from the command line. You can make smart contract calls, send transactions, or retrieve any type of chain data - all from your command-line!
 
 The `cast` binary can be used both within and outside of a Foundry project.
 
 Cast is part of the Foundry suite and is installed alongside `forge`, `chisel`, and `anvil`. If you haven't installed Foundry
 yet, see [Foundry installation](../getting-started/installation.md).
+
+
+> ℹ️ **Note**
+>
+> If you're on Windows, you will need to install and use [Git BASH](https://gitforwindows.org/) or [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
+> since Foundryup-zksync currently does not support Powershell or Cmd. Windows support is currently provided as best-effort.
+
 
 ### Getting started
 
