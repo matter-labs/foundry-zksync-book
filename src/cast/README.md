@@ -18,12 +18,6 @@ Cast is part of the Foundry suite and is installed alongside `forge`, `chisel`, 
 yet, see [Foundry installation](../getting-started/installation.md).
 
 
-> ℹ️ **Note**
->
-> If you're on Windows, you will need to install and use [Git BASH](https://gitforwindows.org/) or [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
-> since Foundryup-zksync currently does not support Powershell or Cmd. Windows support is currently provided as best-effort.
-
-
 ### Getting started
 
 Here are a few examples of what you can do:
