@@ -88,6 +88,16 @@ For example to define the settings on `profile.default`:
 # ...ZKSync specific settings...
 ```
 
+**zksolc vs solc Compiler Differences**
+
+ZKsync uses the **zksolc** compiler, which has different configuration options compared to the standard Solidity compiler (**solc**). When configuring ZKsync projects:
+
+- **zksolc-specific options**: Use the settings documented in this section (e.g., `optimizer_mode`, `fallback_oz`, `bytecode_hash`)
+- **solc-specific options**: Standard Foundry optimizer settings like `optimizer_details` are **not applicable** to zksolc compilation
+- **Shared options**: Basic settings like `optimizer` (boolean) work for both compilers but may have different default behaviors
+
+For comprehensive zksolc compiler options and detailed configuration reference, see the [zksolc Standard JSON documentation](https://matter-labs.github.io/era-compiler-solidity/latest/03-standard-json.html#input-json).
+
 ##### `compile`
 
 - Type: boolean
@@ -119,17 +129,11 @@ The `solc` path to use during `zksolc` compilation.
 
 ##### `bytecode_hash`
 
-- Type: boolean
-- Default: "none" 
+- Type: string
+- Default: "none"
+- Options: "none" | "ipfs"
 
-Whether to include the metadata hash for zksolc compiled bytecode.
-
-##### `fallback_oz`
-
-- Type: boolean
-- Default: false 
-
-Allow compiler to recompile using `optimizer_mode = 'z'` if contracts won't fit in the EraVM bytecode size limitations.
+The bytecode hash method for zksolc compiled bytecode metadata. Set to "none" to exclude metadata hash, or "ipfs" to include IPFS hash.
 
 ##### `enable_eravm_extensions`
 
@@ -152,6 +156,10 @@ Force compilation via EVMLA instead of Yul codegen pipeline.
 
 List of glob patterns to avoid compiling with zksolc.
 
+#### ZKsync Optimizer Settings
+
+The following settings control zksolc-specific optimization behavior. These are different from standard Solidity compiler (solc) optimizer options.
+
 ##### `optimizer`
 
 - Type: boolean
@@ -163,13 +171,65 @@ Enable optimizer on zksolc.
 
 - Type: string
 - Default: '3'
+- Options: '0' | '1' | '2' | '3' | 's' | 'z'
 
-The zksolc optimizer mode (0 | 1 | 2 | 3 | s | z).
+The zksolc optimizer mode. Each mode represents different optimization strategies:
+- '0': No optimization
+- '1': Basic optimization
+- '2': Advanced optimization  
+- '3': Aggressive optimization (default)
+- 's': Optimize for size
+- 'z': Optimize for size with fallback (used internally by `fallback_oz`)
+
+##### `fallback_oz`
+
+- Type: boolean
+- Default: false 
+
+Enable size fallback optimization (corresponds to zksolc's `sizeFallback` setting). When enabled, if contracts exceed EraVM bytecode size limitations, the compiler will automatically recompile using `optimizer_mode = 'z'` to reduce bytecode size.
 
 ##### `optimizer_details`
 
 - Type: object
 - Default: {}
 
-Allows specifying additional zksolc [Optimizer Details](https://github.com/matter-labs/era-compiler-solidity/blob/main/era-compiler-solidity/src/solc/standard_json/input/settings/optimizer/details.rs#L10).
+**⚠️ zksolc Compatibility Note**: This option is specific to the standard Solidity compiler (solc) and is **not used by zksolc**. 
 
+zksolc uses a fundamentally different optimization approach compared to solc:
+
+**For zksolc compilation**, use these zksolc-specific optimizer settings:
+- `optimizer_mode`: Controls zksolc optimization level ('0' | '1' | '2' | '3' | 's' | 'z')
+- `fallback_oz`: Enables automatic size fallback optimization (corresponds to zksolc's `sizeFallback`)
+
+**For standard EVM compilation** (when `zksync.compile = false`), the standard `optimizer_details` settings apply.
+
+**Choosing the Right Optimizer Settings**
+
+- **ZKsync projects**: Configure `optimizer_mode` and `fallback_oz` in the `[profile.default.zksync]` section
+- **Standard EVM projects**: Configure `optimizer_details` in the main profile section
+- **Hybrid projects**: You can use both - zksolc settings for ZKsync compilation and solc settings for standard EVM compilation
+
+**Configuration Examples:**
+
+ZKsync-only project:
+```toml
+[profile.default.zksync]
+compile = true
+optimizer_mode = "3"
+fallback_oz = true
+bytecode_hash = "ipfs"
+```
+
+Hybrid project (both EVM and ZKsync):
+```toml
+[profile.default]
+optimizer = true
+optimizer_runs = 200
+
+[profile.default.zksync]
+compile = true
+optimizer_mode = "3"
+fallback_oz = true
+```
+
+For comprehensive zksolc compiler options and detailed configuration reference, see the [zksolc Standard JSON documentation](https://matter-labs.github.io/era-compiler-solidity/latest/03-standard-json.html#input-json).

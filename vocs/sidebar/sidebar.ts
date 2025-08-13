@@ -42,6 +42,23 @@ export const sidebar: Sidebar = [
     ],
   },
   {
+    text: "Configuration",
+    collapsed: true,
+    items: [
+      { text: "Overview", link: "/config/overview" },
+      {
+        text: "Reference",
+        collapsed: true,
+        items: [
+          { text: "Project", link: "/config/reference/project" },
+          { text: "Testing", link: "/config/reference/testing" },
+          { text: "Solidity Compiler", link: "/config/reference/solidity-compiler" },
+          { text: "Default Config", link: "/config/reference/default-config" },
+        ],
+      },
+    ],
+  },
+  {
     text: "ZKSync Specifics",
     items: zksyncSpecifics,
   },

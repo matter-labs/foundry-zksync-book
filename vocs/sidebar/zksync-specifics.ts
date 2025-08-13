@@ -18,10 +18,6 @@ export const zksyncSpecifics: SidebarItem[] = [
     link: '/zksync-specifics/execution-overview',
   },
   {
-    text: 'Configuration Overview',
-    link: '/zksync-specifics/configuration-overview',
-  },
-  {
     text: 'Gas',
     link: '/zksync-specifics/gas',
   },

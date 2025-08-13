@@ -17,6 +17,19 @@ optimizer_runs = 20_000
 verbosity = 4
 ```
 
+**ZKsync Configuration Note:** The example above shows standard EVM compilation settings. For **ZKsync projects**, the optimizer configuration is different:
+
+```toml
+[profile.default]
+optimizer = true
+
+[profile.default.zksync]
+optimizer_mode = "3"
+fallback_oz = false
+```
+
+See the [ZKsync Configuration Reference](/config/reference/project#zksync-settings) for complete ZKsync-specific options.
+
 When running `forge`, you can specify the profile to use using the `FOUNDRY_PROFILE` environment variable.
 
 ### Standalone sections
