@@ -69,7 +69,7 @@ Or, by manually building from a local copy of the [Foundry-ZKsync repository](ht
 ```sh
 # clone the repository
 git clone https://github.com/matter-labs/foundry-zksync.git
-cd foundry
+cd foundry-zksync
 # install Forge
 cargo install --path ./crates/forge --profile release --force --locked
 # install Cast
