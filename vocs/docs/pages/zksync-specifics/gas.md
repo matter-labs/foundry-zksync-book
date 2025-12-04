@@ -48,11 +48,11 @@ From the params above, we can get all gas-related values used in the transaction
 ### Customizing gas values
 Some gas parameters can be customized when broadcasting transactions with `forge script` by using the following flags:
 
-* `--with-gas-price-price`: sets `max_fee_per_gas` to be used in the transaction.
+* `--with-gas-price`: sets `max_fee_per_gas` to be used in the transaction.
 * `--priority-gas-price`: sets `max_priority_fee_per_gas` to be used in the transaction.
 * `--zk-gas-per-pubdata`: sets `gasPerPubdata` to be used in the transaction.
 
 Example: 
 ```sh
-forge script script/NFT.s.sol:MyScript --fork-url http://localhost:8545 --broadcast --with-gas-price-price 370000037 --priority-gas-price 10000 --zk-gas-per-pubdata 3241
+forge script script/NFT.s.sol:MyScript --fork-url http://localhost:8545 --broadcast --with-gas-price 370000037 --priority-gas-price 10000 --zk-gas-per-pubdata 3241
 ```
